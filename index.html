@@ -3,25 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wish uwu - Official Store</title>
+<title>Chelderine - Official Store</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#E3F2FD; 
---main:#4FC3F7;
---dark:#0277BD;
---white:#FFFFFF;
---glow:rgba(79,195,247,0.4);
---accent:#FFF176;
+--bg-blue:#E6F3FA; 
+--powder-blue:#C6E4F3;
+--powder-blue-light:#D8F0FA;
+--baby-pink:#FFD8E8;
+--pink-accent:#FFC2DA;
+--main:#6899C5;
+--dark:#2C4257;
+--glow:rgba(198,228,243,0.6);
 --status-red:#FF8FB1;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Mitr',sans-serif;}
 
 body{
-background:var(--bg);
+background: linear-gradient(135deg, #E6F3FA 0%, #EFF8FC 50%, #FFE3EF 100%);
+background-attachment: fixed;
 display:flex;
 justify-content:center;
 position: relative;
@@ -29,8 +32,8 @@ overflow-x: hidden;
 min-height: 100vh;
 }
 
-/* --- พื้นหลังอิโมจิฟุ้งๆ --- */
-.bg-emojis {
+/* --- พื้นหลังตกแต่งดาว หัวใจ และจุด ลอยช้าๆ --- */
+.bg-decorations {
   position: fixed;
   top: 0;
   left: 0;
@@ -38,18 +41,48 @@ min-height: 100vh;
   height: 100%;
   z-index: -1;
   pointer-events: none;
-  font-size: 24px;
 }
 
-.floating-emoji {
+/* ดาว 5 แฉกสีขาว */
+.floating-star {
   position: absolute;
-  animation: floatBG 15s infinite linear;
-  opacity: 0.4;
+  fill: #FFFFFF;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95));
+  animation: floatUp 26s infinite ease-in-out;
+  opacity: 0.85;
 }
 
-@keyframes floatBG {
-  0% { transform: translateY(110vh) rotate(0deg); }
-  100% { transform: translateY(-10vh) rotate(360deg); }
+/* หัวใจสีชมพูอ่อนละมุน */
+.floating-heart {
+  position: absolute;
+  fill: var(--pink-accent);
+  filter: drop-shadow(0 0 6px rgba(255, 194, 218, 0.5));
+  animation: floatUp 24s infinite ease-in-out;
+  opacity: 0.75;
+}
+
+.item-lg { width: 26px; height: 26px; }
+.item-sm { width: 16px; height: 16px; }
+
+/* จุดเล็กๆ */
+.floating-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+  animation: floatUp 28s infinite ease-in-out;
+  opacity: 0.75;
+}
+
+.dot-sm { width: 5px; height: 5px; }
+
+@keyframes floatUp {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% { transform: translateY(-10vh) rotate(180deg); opacity: 0; }
 }
 
 .container{
@@ -60,18 +93,18 @@ z-index: 1;
 }
 
 .section{
-background:var(--white);
+background:#FFFFFF;
 border-radius:20px;
 padding:25px 20px;
 margin-bottom:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.05);
-border:2px solid var(--main);
+box-shadow:0 10px 30px rgba(160,185,215,0.22);
+border:2px solid var(--powder-blue-light);
 }
 
 h1,h2,h3{color:var(--dark);}
 .center{text-align:center;}
 
-/* --- โลโก้และอิโมจิรอบโลโก้ --- */
+/* --- โลโก้ --- */
 .logo-wrapper {
   position: relative;
   width: 200px;
@@ -86,23 +119,29 @@ h1,h2,h3{color:var(--dark);}
 width:150px;height:150px;
 border-radius:50%;
 overflow:hidden;
-box-shadow:0 6px 20px var(--glow);
-border: 4px solid var(--white);
+box-shadow:0 8px 25px rgba(198,228,243,0.8);
+border: 4px solid #FFFFFF;
 position: relative;
 z-index: 2;
 }
 
-.logo img{width:100%;height:100%;object-fit:cover;}
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
 
 .logo-deco {
   position: absolute;
   font-size: 28px;
   animation: pulse 3s infinite ease-in-out;
+  opacity: 0;
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.2); opacity: 1; }
+  0%, 100% { transform: scale(1); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 0; }
 }
 
 .badges{
@@ -114,13 +153,21 @@ margin-bottom:20px;
 }
 
 .badge{
-background:#fff;
-padding:8px 16px;
+background:#FFFFFF;
+padding:8px 18px;
 border-radius:25px;
-box-shadow:0 4px 10px var(--glow);
+box-shadow:0 4px 15px rgba(198,228,243,0.4);
 font-size:13px;
 color:var(--dark);
-border: 1px solid var(--main);
+border: 1.5px solid var(--powder-blue-light);
+text-decoration:none;
+transition: 0.3s;
+font-weight: 500;
+}
+
+.badge:hover{
+background:var(--powder-blue-light);
+color:var(--dark);
 }
 
 .btn{
@@ -139,8 +186,8 @@ gap: 8px;
 }
 
 .btn-outline{
-background:#fff;
-border:2px dashed var(--main);
+background:#FFFFFF;
+border:2px dashed var(--powder-blue-light);
 color:var(--dark);
 }
 
@@ -161,8 +208,15 @@ color:var(--dark);
 }
 
 .btn-main{
-background:var(--main);
-color:#fff;
+background: linear-gradient(135deg, #B5E2FA 0%, #D8F0FA 100%);
+color:var(--dark);
+box-shadow: 0 4px 15px rgba(180,215,240,0.6);
+border: 1px solid #FFFFFF;
+}
+
+.btn-main:hover{
+opacity: 0.92;
+transform: translateY(-1px);
 }
 
 .step{
@@ -173,8 +227,8 @@ margin-bottom:12px;
 }
 
 .step-num{
-background:var(--main);
-color:#fff;
+background:var(--powder-blue-light);
+color:var(--dark);
 width:26px;height:26px;
 border-radius:50%;
 display:flex;
@@ -190,19 +244,31 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:10px;
-background:#f7fdff;
+background: linear-gradient(90deg, #F3F9FD 0%, #F5FAFE 100%);
 padding:10px 15px;
 border-radius:15px;
-border-left: 4px solid var(--main);
+border-left: 4px solid var(--powder-blue);
+box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
 .price-tag{
-background:var(--main);
-color:#fff;
+background: #BDE3F7;
+color: var(--dark);
 padding:3px 12px;
 border-radius:20px;
-font-size:14px;
+font-size:13px;
+font-weight: 500;
 white-space: nowrap;
+border: 1px solid #FFFFFF;
+}
+
+.sub-label {
+display: block;
+font-size: 11px;
+color: var(--dark);
+opacity: 0.65;
+font-weight: 300;
+margin-top: 2px;
 }
 
 .footer{
@@ -212,44 +278,67 @@ margin-top:30px;
 
 .socials{
 display:flex;
-gap:8px;
+gap:10px;
 justify-content:center;
 margin-top:15px;
 }
 
 .socials a{
 flex:1;
-max-width:100px;
+max-width:140px;
 text-align:center;
-padding:8px;
+padding:10px 15px;
 border-radius:25px;
-background:#fff;
+background:#FFFFFF;
 text-decoration:none;
 color:var(--dark);
 font-size:13px;
-border:1px solid #e1f5fe;
+font-weight:500;
+border:1.5px solid var(--powder-blue);
+box-shadow:0 4px 15px rgba(198,228,243,0.4);
+display: flex;
+align-items: center;
+justify-content: center;
+transition: 0.3s;
+}
+
+.socials a:hover{
+background:var(--powder-blue-light);
+color:var(--dark);
 }
 
 .small{font-size:12px;opacity:.7;margin-top:10px;}
 
 .rule-box {
-background: #fff9c4;
+background: #FFF5F9;
 padding: 15px;
 border-radius: 15px;
 font-size: 14px;
 margin-top: 15px;
-border: 1px dashed #fbc02d;
+border: 1px dashed var(--baby-pink);
 }
 </style>
 </head>
 
 <body>
-  <div class="bg-emojis">
-    <span class="floating-emoji" style="left: 10%; animation-delay: 0s;">🪼</span>
-    <span class="floating-emoji" style="left: 25%; animation-delay: 2s;">🌙</span>
-    <span class="floating-emoji" style="left: 45%; animation-delay: 4s;">⭐️</span>
-    <span class="floating-emoji" style="left: 70%; animation-delay: 6s;">🪼</span>
-    <span class="floating-emoji" style="left: 85%; animation-delay: 8s;">⭐️</span>
+  <!-- พื้นหลังตกแต่งดาว หัวใจสีชมพูอ่อน และจุดสีขาว ลอยช้าๆ -->
+  <div class="bg-decorations">
+    <!-- ดาวใหญ่ -->
+    <svg class="floating-star item-lg" style="left: 6%; animation-delay: 0s;" viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+    <!-- หัวใจเล็กสีชมพูอ่อน -->
+    <svg class="floating-heart item-sm" style="left: 18%; animation-delay: 3s;" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <!-- จุดเล็ก -->
+    <span class="floating-dot" style="left: 28%; animation-delay: 6s;"></span>
+    <!-- ดาวเล็ก -->
+    <svg class="floating-star item-sm" style="left: 38%; animation-delay: 9s;" viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+    <!-- หัวใจใหญ่สีชมพูอ่อน -->
+    <svg class="floating-heart item-lg" style="left: 52%; animation-delay: 2s;" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    <!-- จุดเล็กกว่า -->
+    <span class="floating-dot dot-sm" style="left: 65%; animation-delay: 11s;"></span>
+    <!-- ดาวใหญ่ -->
+    <svg class="floating-star item-lg" style="left: 76%; animation-delay: 5s;" viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+    <!-- หัวใจเล็กสีชมพูอ่อน -->
+    <svg class="floating-heart item-sm" style="left: 88%; animation-delay: 8s;" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
   </div>
 
 <div class="container">
@@ -257,65 +346,152 @@ border: 1px dashed #fbc02d;
 <div class="section center" style="border:none;box-shadow:none;background:transparent;">
 
 <div class="logo-wrapper">
-  <span class="logo-deco" style="top: 0; left: 10%;">🪼</span>
-  <span class="logo-deco" style="bottom: 10%; right: 5%;">🌙</span>
-  <span class="logo-deco" style="top: 20%; right: 0%;">⭐️</span>
+  <span class="logo-deco" style="top: 0; left: 10%;"></span>
+  <span class="logo-deco" style="bottom: 10%; right: 5%;"></span>
+  <span class="logo-deco" style="top: 20%; right: 0%;"></span>
   <div class="logo">
-    <img src="att.be82oFQlt5Q154biR3LCzBXlgJKcQ_gDr4r5yDftOug.jpeg" alt="wish uwu logo">
+    <img src="https://i.postimg.cc/7Yp9bGtj/Messenger-creation-AA3F6446-C053-4584-8EBC-AA3334C010B9.jpg" alt="Chelderine logo">
   </div>
 </div>
 
-<h1>wish uwu</h1>
-<p style="color:var(--dark);opacity:.8;margin:10px 0 20px;">
-รับทำป้าย เริ่มต้น 59.- ☁️✨
+<h1>Chelderine</h1>
+<p style="color:var(--dark);opacity:.85;margin:10px 0 20px;">
+ยินดีต้อนรับเข้าสู่ร้านของเค้านะคะ
 </p>
 
 <div class="badges">
-<div class="badge">🎨 ป้ายวิปครีม</div>
-<div class="badge">🧸 แนวน่ารัก</div>
-<div class="badge">✨ แนวฟุ้ง</div>
-<div class="badge">📊 ป้ายเรท</div>
+<a href="#session1" class="badge">Fivem Service</a>
+<a href="#session2" class="badge">Chelderine Design</a>
 </div>
 
-<a href="https://lin.ee/V1bfWni" class="btn btn-outline">
-<span class="status-dot"></span> เปิดรับคิวนะคะ💧💧
-</a>
 </div>
 
-<div class="section">
-<h2>📝 ขั้นตอนการสั่งซื้อ</h2>
-<div class="step"><div class="step-num">1</div><div>ดูตัวอย่างงาน บล็อกและตูนจากลิงก์ด้านล่าง</div></div>
-<div class="step"><div class="step-num">2</div><div>แจ้งป้ายที่สนใจ โทนสี ตูน และคำที่ต้องการ (บรีฟละเอียด)</div></div>
-<div class="step"><div class="step-num">3</div><div>โอนเงินเพื่อเริ่มงาน (โอน = เริ่มคิว)</div></div>
-<div class="step"><div class="step-num">4</div><div>รอรับงานเช็คภายใน 4-8 ชม. (ตามคิววันนั้นๆ)</div></div>
+<div id="session1" class="section">
+<h2>Fivem Service</h2>
+<p style="font-size:13px; color:var(--dark); margin-bottom:15px; opacity:0.9;">บริการร้องเพลงและออกแบบโลโก้แก๊ง</p>
 
-<a href="https://drive.google.com/drive/folders/1IBZCb_gTE7j2CvQw7j2MxGuWsm_lwFtM" class="btn btn-main">เลือก Blog & การ์ตูน 🧸</a>
-<a href="https://drive.google.com/drive/folders/1iTua1B5bVV9VZ6FXwRDDX-NdBIe4l44R" class="btn btn-outline">ดูตัวอย่างผลงาน ✨</a>
+<div style="margin-bottom: 20px;">
+<h3 style="font-size: 15px; margin-bottom: 8px; color: var(--dark);">บริการร้องเพลงและแต่งเพลง</h3>
+<div class="price-row">
+  <div>ร้องเพลงในประเทศ / งาน Event ในเมือง</div>
+  <span class="price-tag">300 - 500฿</span>
+</div>
+<div class="price-row">
+  <div>
+    ร้องส่วนตัว / วันเกิด / ร้องชิวๆ
+    <span class="sub-label">(เรทชั่วโมงละ)</span>
+  </div>
+  <span class="price-tag">60฿</span>
+</div>
+<div class="price-row">
+  <div>รับอัดเพลง / แต่งเพลง</div>
+  <span class="price-tag">350฿ / เพลง</span>
+</div>
 </div>
 
-<div class="section">
-<h2>💰 เมนูราคางาน</h2>
-<div class="price-row"><span>ป้ายแนวน่ารัก / ฟุ้ง / ทั่วไป</span><span class="price-tag">เริ่ม 59฿</span></div>
-<div class="price-row"><span>ป้ายแนววิปครีม V.2</span><span class="price-tag">เริ่ม 79฿</span></div>
-<div class="price-row"><span>ป้ายเรทต่างๆ</span><span class="price-tag">เริ่ม 79฿</span></div>
-<div class="price-row"><span>งานเร่ง (Fast Track)</span><span class="price-tag">*2 ของราคาปกติ</span></div>
+<div>
+<h3 style="font-size: 15px; margin-bottom: 8px; color: var(--dark);">รับออกแบบโลโก้แก๊ง / แฟม</h3>
+<div class="price-row">
+  <div>
+    เริ่มต้น
+    <span class="sub-label">(แก้ไขบรีฟงานได้จนพอใจ ไม่คิดเพิ่ม)</span>
+  </div>
+  <span class="price-tag">89฿</span>
+</div>
+<div class="price-row">
+  <div>
+    คิวปกติ
+    <span class="sub-label">(รอรับงาน 2-3 วัน)</span>
+  </div>
+  <span class="price-tag">ปกติ</span>
+</div>
+<div class="price-row">
+  <div>
+    คิว x2
+    <span class="sub-label">(รอรับงาน 1-2 วัน)</span>
+  </div>
+  <span class="price-tag">x2</span>
+</div>
+<div class="price-row">
+  <div>
+    คิว x3
+    <span class="sub-label">(ทำในวันนั้นเลย)</span>
+  </div>
+  <span class="price-tag">x3</span>
+</div>
+</div>
 
-<div class="rule-box">
-<strong>📍 กฎของร้าน:</strong><br>
-• โอนแล้วไม่คืนเงินทุกกรณี<br>
-• ยกเลิกหลังบรีฟ (เริ่มงานแล้ว) คืน 50%<br>
-• ยกเลิกหลังจากเช็คงาน = ไม่คืน และส่งงานปกติ
+<a href="https://www.facebook.com/share/1Avuu3KJve/" target="_blank" rel="noopener noreferrer" class="btn btn-main">ติดต่อ Fivem Service ทาง Facebook</a>
+</div>
+
+<div id="session2" class="section">
+<h2>Chelderine Design</h2>
+<p style="font-size:13px; color:var(--dark); margin-bottom:15px; opacity:0.9;">บริการออกแบบเสื้อผ้า โลโก้ ป้ายแท็ค และรายงาน</p>
+
+<div style="margin-bottom: 20px;">
+<h3 style="font-size: 15px; margin-bottom: 8px; color: var(--dark);">รับออกแบบเสื้อผ้า (เสื้อธีม / เสื้อกลุ่ม)</h3>
+<div class="price-row">
+  <div>
+    เริ่มต้น
+    <span class="sub-label">(ราคาขึ้นอยู่กับงานที่ลูกค้าบรีฟ)</span>
+  </div>
+  <span class="price-tag">169฿</span>
+</div>
+<div style="font-size: 12px; color: var(--dark); opacity: 0.8; margin-top: 5px; padding-left: 5px;">*แก้ไขบรีฟงานได้จนพอใจ ไม่คิดเพิ่ม</div>
+</div>
+
+<div style="margin-bottom: 20px;">
+<h3 style="font-size: 15px; margin-bottom: 8px; color: var(--dark);">รับออกแบบโลโก้ / ป้ายแท็คชื่อแบรนด์</h3>
+<div class="price-row">
+  <div>
+    เริ่มต้น
+    <span class="sub-label">(แก้ไขบรีฟงานได้จนพอใจ ไม่คิดเพิ่ม)</span>
+  </div>
+  <span class="price-tag">89฿</span>
+</div>
+<div class="price-row">
+  <div>
+    คิวปกติ
+    <span class="sub-label">(รอรับงาน 2-3 วัน)</span>
+  </div>
+  <span class="price-tag">ปกติ</span>
+</div>
+<div class="price-row">
+  <div>
+    คิว x2
+    <span class="sub-label">(รอรับงาน 1-2 วัน)</span>
+  </div>
+  <span class="price-tag">x2</span>
+</div>
+<div class="price-row">
+  <div>
+    คิว x3
+    <span class="sub-label">(ทำในวันนั้นเลย)</span>
+  </div>
+  <span class="price-tag">x3</span>
+</div>
+</div>
+
+<div>
+<h3 style="font-size: 15px; margin-bottom: 8px; color: var(--dark);">รับแต่งชีท รายงาน พรีเซนต์ (ลูกค้านำข้อมูลมาเอง)</h3>
+<div class="price-row">
+  <div>
+    เริ่มต้น
+    <span class="sub-label">(ขึ้นอยู่กับบรีฟของลูกค้า)</span>
+  </div>
+  <span class="price-tag">69฿</span>
+</div>
 </div>
 </div>
 
 <div class="footer">
-<a href="https://lin.ee/V1bfWni" class="btn btn-main">สั่งงาน / สอบถามทาง LINE 🎀</a>
+<h2 style="font-size: 18px; margin-bottom: 10px;">CONTACT US</h2>
 <div class="socials">
-<a href="https://www.facebook.com/share/1H4J8KVrQW/?mibextid=wwXIfr">Facebook</a>
-<a href="https://lin.ee/V1bfWni">Line Official</a>
-<a href="https://drive.google.com/drive/folders/1iTua1B5bVV9VZ6FXwRDDX-NdBIe4l44R">Portfolio</a>
+<a href="https://www.facebook.com/share/1Avuu3KJve/" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://line.me/ti/p/~krorawan3530" target="_blank" rel="noopener noreferrer">Line ID</a>
+<a href="https://www.instagram.com/jasperx._" target="_blank" rel="noopener noreferrer">Instagram</a>
 </div>
-<p class="small">© 2026 wish uwu - ขอบคุณที่ใช้บริการค่ะ</p>
+<p class="small">© 2026 Chelderine - ขอบคุณที่ใช้บริการค่ะ</p>
 </div>
 
 </div>
